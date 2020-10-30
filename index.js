@@ -8,4 +8,4 @@ export default (url) => {
 };
 
 export const convertAsync = NativeModules.VideoCache.convertAsync;
-
+export const convertAndStartDownloadAsync = NativeModules.VideoCache.convertAndStartDownloadAsync;
