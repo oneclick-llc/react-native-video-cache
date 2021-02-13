@@ -46,7 +46,7 @@ public class VideoCacheModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void convertAndStartDownloadAsync(String videoUrl, int bufLen, Promise promise) {
+    public void convertAndStartDownloadAsync(String videoUrl, Promise promise) {
         if (this.proxy == null) {
             this.proxy = new HttpProxyCacheServer(this.reactContext);
         }
@@ -65,9 +65,6 @@ public class VideoCacheModule extends ReactContextBaseJavaModule {
             int length = 0;
             int count = 0;
             while ((length = inputStream.read(buffer)) != -1) {
-              if (bufLen == 0) continue;
-              count ++;
-              if (bufLen <= count) break;
             }
             promise.resolve(proxyUrl);
         } catch (Exception e) {

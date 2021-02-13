@@ -1,11 +1,20 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from "react-native";
 
 export default (url) => {
-  if (!global.nativeCallSyncHook) {
-    return url
+  if (Platform.OS === "web") {
+    return url;
   }
-  return NativeModules.VideoCache.convert(url)
+  if (!global.nativeCallSyncHook) {
+    return url;
+  }
+  return NativeModules.VideoCache.convert(url);
 };
 
-export const convertAsync = NativeModules.VideoCache.convertAsync;
+export const convertAsync = (url) => {
+  if (Platform.OS === "web") {
+    return Promise.resolve(url);
+  }
+  return NativeModules.VideoCache.convertAsync(url);
+};
+
 export const convertAndStartDownloadAsync = NativeModules.VideoCache.convertAndStartDownloadAsync;
