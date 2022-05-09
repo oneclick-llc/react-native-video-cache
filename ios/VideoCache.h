@@ -1,5 +1,9 @@
 #import <React/RCTBridgeModule.h>
 
-@interface VideoCache : NSObject <RCTBridgeModule>
+typedef (HandleResponseBlock)(NSString *);
 
+@interface VideoCache : NSObject <RCTBridgeModule>
+- (NSData *) getDataFrom:(NSString *)url;
+- (void) downloadFile:(NSURL *) url callback:(HandleResponseBlock) callback;
+- (NSString*) applicationDocumentsDirectory;
 @end
